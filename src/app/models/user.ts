@@ -32,4 +32,3 @@ export interface IUserRes {
       public image: string
     ){};
   }
-  
