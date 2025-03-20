@@ -1,1 +1,21 @@
-<p>user-info works!</p>
+<div class="card">
+    <img src="{{user.image}}" class="card-img-top" alt="{{user.last_name}}">
+    <div class="card-body text-center">
+      <p class="card-text">{{user.username}}</p>
+      <a [routerLink]="['/user', user._id]" class="btn btn-transparent"><span class="bi bi-search"></span>Ver detalle</a>
+      <a [routerLink]="['/updateuser', user._id]" class="btn btn-transparent"><span class="bi bi-arrow-repeat"></span>Actualizar</a>
+      <a [swal]="deleteSwal" class="btn btn-transparent"><span class="bi bi-trash"></span>Borrar</a>
+    </div>
+</div>
+
+<swal
+  #deleteSwal
+  title="Confirmación"
+  text="¿Deseas borrar al usuario {{user.first_name}}?"
+  [showCancelButton]="true"
+  cancelButtonText = "Cancelar"
+  confirmButtonText = "Aceptar"
+  [showCloseButton] = "true"
+  icon="warning"
+  (confirm)="onDeleteUser(user)">
+</swal>
