@@ -1,1 +1,46 @@
-<p>user-form works!</p>
+@if(errorMessage){
+    <div class="alert alert-danger" role="alert">
+      Se ha producido un error obteniendo el usuario: {{errorMessage}}
+    </div>
+} @else if(!id || userForm.value.first_name) {
+    <div class="form-user-container">
+        <h1>{{!id ? 'NUEVO USUARIO' : 'ACTUALIZAR USUARIO'}}</h1>
+        <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+            <div class="mb-3">
+                <label for="first_name" class="form-label">Nombre Usuario</label>
+                <input id="first_name" formControlName="first_name" class="form-control" [class.is-invalid]="userForm.controls['first_name'].errors?.['required'] && (userForm.controls['first_name'].touched || userForm.controls['first_name'].dirty)">
+                @if(userForm.controls['first_name'].errors?.['required'] && (userForm.controls['first_name'].touched || userForm.controls['first_name'].dirty)){
+                    <small>El nombre es obligatorio</small>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Apellido Usuario</label>
+                <input id="last_name" formControlName="last_name" class="form-control" [class.is-invalid]="userForm.controls['last_name'].errors?.['required'] && (userForm.controls['last_name'].touched || userForm.controls['last_name'].dirty)">
+                @if(userForm.controls['last_name'].errors?.['required'] && (userForm.controls['last_name'].touched || userForm.controls['last_name'].dirty)){
+                    <small>El apellido es obligatorio</small>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Usuario</label>
+                <input id="email" formControlName="email" type="email" class="form-control" [class.is-invalid]="userForm.controls['email'].invalid && (userForm.controls['email'].touched || userForm.controls['email'].dirty)">
+                @if(userForm.controls['email'].invalid && (userForm.controls['email'].touched || userForm.controls['email'].dirty)){
+                    <small>El email es obligatorio y debe cumplir con el formato</small>
+                }
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Imagen Usuario</label>
+                <input id="image" formControlName="image" class="form-control"  [class.is-invalid]="userForm.controls['image'].invalid && (userForm.controls['image'].touched || userForm.controls['image'].dirty)">
+                @if(userForm.controls['image'].invalid && (userForm.controls['image'].touched || userForm.controls['image'].dirty)){
+                    <small>La imagen es obligatoria y debe ser una url</small>
+                }
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
+                @if(!id){
+                    Crear
+                } @else {
+                    Actualizar
+                }
+            </button>
+        </form>
+    </div>
+}

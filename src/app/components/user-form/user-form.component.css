@@ -1,0 +1,9 @@
+.form-user-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+small {
+    color: red;
+}
