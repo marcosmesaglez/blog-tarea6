@@ -1,3 +1,20 @@
+ <!-- <div class="homeContainer">
+    <div class="userContainer">
+        @for (user of userList; track user.id) {
+            <app-user-info [user]="user"></app-user-info>
+        }
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            @for(item of [].constructor(totalPages); track item; let idx = $index){
+                <li class="page-item" [class.active]="currentPage === idx + 1">
+                    <button class="page-link" (click)="goToPage(idx + 1)">{{ idx + 1 }}</button>
+                </li>
+            }
+        </ul>
+    </nav>
+</div> -->
+
 <div class="homeContainer">
     <div class="row row-cols-4 row-cols-md-4 g-4">
         @for (user of userList; track user.id) {
