@@ -1,1 +1,35 @@
-<p>user-detail works!</p>
+@if(errorMessage){
+    <div class="alert alert-danger" role="alert">
+      Se ha producido un error obteniendo el usuario: {{errorMessage}}
+    </div>
+  } @else if(user) {
+    <div class="user-detail-container">
+      <div class="right-container flexbox-item">
+          <img class="userImg" src="{{user.image}}" />
+      </div>
+      <div class="left-container flexbox-item">
+          <span class="main-data-user">{{user.first_name}}</span>
+          <span class="main-data-user">{{user.last_name}}</span>
+          <div><span class="info-label">Nombre Usuario: </span>{{user.username}}</div>
+          <div><span class="info-label">Email: </span> {{user.email}}</div>
+          <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-primary" [swal]="deleteSwal">Eliminar</button>
+              <button type="button" class="btn btn-primary" [routerLink]="['/updateuser', user._id]">Actualizar</button>
+              <button type="button" class="btn btn-primary" [routerLink]="['/home']">Volver al listado</button>
+            </div>
+      </div>
+    </div>
+  
+    <swal
+      #deleteSwal
+      title="Confirmación"
+      text="¿Deseas borrar al usuario {{user.first_name}}?"
+      [showCancelButton]="true"
+      cancelButtonText = "Cancelar"
+      confirmButtonText = "Aceptar"
+      [showCloseButton] = "true"
+      icon="warning"
+      (confirm)="onDeleteUser(user)">
+    </swal>
+  }
+  
